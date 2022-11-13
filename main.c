@@ -39,10 +39,12 @@ int main(){
         printf("x_speed:%.1f y_speed:%.1f cr_speed:%.1f\n",results.x_speed,results.y_speed,results.cr_speed);
         printf("--------motor speed--------\n");
         printf("m1\tm2\tm3\tm4\n");
+        mecanum_positive_calculate( &model , &source , &results );
         for(int temp = 0;temp<4;temp++){
-            printf("%.3f\t",source[temp]);
+            printf("%.2f\t",source[temp]);
         }
         printf("\n");
+        printf("result: %.2f %.2f %.2f\n",results.x_speed,results.y_speed,results.cr_speed);
     }
 
     system("pause");

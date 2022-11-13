@@ -39,8 +39,6 @@ typedef struct{
     float cr_speed;    //center_rotation_speed 几何中心旋转速度
 }mecanum_center_speed_t;
 
-
-
 /******************************模型类型定义**********************/
 //运动学模型的输入 -> 4个轮子的转速
 typedef mecanum_motor_speed_t mecanum_input_t;
