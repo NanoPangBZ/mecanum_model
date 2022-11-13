@@ -1,8 +1,8 @@
 /*
- * @Author: 没人要的野指针
+ * @Author: 没人要的野指针 https://github.com/CodingBugStd
  * @Date: 2022-11-05 08:10:43
- * @LastEditors: 没人要的野指针
- * @LastEditTime: 2022-11-06 23:02:23
+ * @LastEditors: 没人要的野指针 https://github.com/CodingBugStd
+ * @LastEditTime: 2022-11-08 01:05:26
  * @Description: 矩形麦克纳姆轮运动学正逆解
  * Copyright (c) 2022 CodingBugStd, All Rights Reserved. 
  */
@@ -26,27 +26,56 @@
 // cm rad  rad/s cm/s
 // mm n    n/min mm/min
 
-//源 -> 4个轮子的转速(标量)
-typedef float mecanum_source_t[4];
 
-//结果 -> 几何中心的速度(矢量)
+
+/********************************具体类型定义**********************/
+//麦克纳姆轮小车四个电机的速度(标量)
+typedef float mecanum_motor_speed_t[4];
+
+//麦克纳姆轮小车几何中心的速度(矢量)
 typedef struct{
     float x_speed;
     float y_speed;
     float cr_speed;    //center_rotation_speed 几何中心旋转速度
-}mecanum_results_t;
+}mecanum_center_speed_t;
 
-//模型
+
+
+/******************************模型类型定义**********************/
+//运动学模型的输入 -> 4个轮子的转速
+typedef mecanum_motor_speed_t mecanum_input_t;
+
+//运动学模型的输出 -> 几何中心的速度
+typedef mecanum_center_speed_t mecanum_output_t;
+
+//运动学模型的常量
 typedef struct{
     float x_len;    //几何中心到轮子的长度在x方向上的投影长度
     float y_len;    //几何中心到轮子的长度在y方向上的投影长度
     float wheel_r;  //轮子半径
-}mecanum_model_t;
+}mecanum_constant_t;
 
-//运动学正解
-void mecanum_positive_calculate(const mecanum_model_t*,mecanum_source_t,mecanum_results_t*);
-//运动学逆解
-void mecanum_inverse_calculate(const mecanum_model_t*,mecanum_source_t,mecanum_results_t*);
+
+
+/*****************************基本正逆解函数***************************/
+
+/**
+ * @brief 麦克纳姆轮运动学正解，通过输入解出输出
+ * @param model 麦克纳姆轮模型
+ * @param input 输入
+ * @param output 输出
+ */
+void mecanum_positive_calculate(const mecanum_constant_t* model,mecanum_input_t* input,mecanum_output_t* output);
+
+/**
+ * @brief 麦克纳姆轮运动学逆解，通过输出反解输入
+ * @param model 麦克纳姆轮模型
+ * @param input 输入
+ * @param output 输出
+ */
+void mecanum_inverse_calculate(const mecanum_constant_t* model,mecanum_input_t* input,mecanum_output_t* output);
+
+/***********************开环积分函数*********************************/
 
 #endif  //_MECANUM_H_
 

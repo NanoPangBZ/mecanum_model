@@ -1,11 +1,19 @@
+/*
+ * @Author: 没人要的野指针
+ * @Date: 2022-11-06 22:52:49
+ * @LastEditors: 没人要的野指针 https://github.com/CodingBugStd
+ * @LastEditTime: 2022-11-08 00:58:38
+ * @Description: 
+ * Copyright (c) 2022 CodingBugStd, All Rights Reserved. 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "./model/mecanum.h"
 
-mecanum_model_t model;
-mecanum_source_t source;
-mecanum_results_t results;
+mecanum_constant_t model;
+mecanum_input_t source;
+mecanum_output_t results;
 
 int main(){
     printf("----config model----\n");
@@ -24,7 +32,7 @@ int main(){
         scanf("%f",&results.y_speed);
         printf("input cr_speed:");
         scanf("%f",&results.cr_speed);
-        mecanum_inverse_calculate( &model , source , &results );
+        mecanum_inverse_calculate( &model , &source , &results );
         printf("--------model--------\n");
         printf("x_len:%.1f\ny_len:%.1f\nwheel_r:%.1f\n",model.x_len,model.y_len,model.wheel_r);
         printf("--------target--------\n");
