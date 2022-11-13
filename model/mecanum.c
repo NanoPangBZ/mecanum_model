@@ -19,7 +19,7 @@ void mecanum_inverse_calculate(const mecanum_constant_t* model,mecanum_input_t* 
     float vf = (results->x_speed - results->y_speed) / model->wheel_r;
     float w;
     if( results->cr_speed != 0 ){
-        w = (model->x_len + model->y_len) / results->cr_speed;
+        w = (model->x_len + model->y_len) * results->cr_speed / model->wheel_r;
     }else{
         w = 0;
     }
