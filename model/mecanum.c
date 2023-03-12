@@ -29,10 +29,10 @@ void mecanum_inverse_calculate(const mecanum_constant_t* model,mecanum_input_t* 
     }else{
         w = 0;
     }
-    (*source)[0] = vf - w ;
-    (*source)[1] = vz - w ;
-    (*source)[2] = vf + w ;
-    (*source)[3] = vz + w ;
+    (*source)[0] = vz + w ;
+    (*source)[1] = vf - w ;
+    (*source)[2] = vz + w ;
+    (*source)[3] = vf - w ;
 }
 
 
